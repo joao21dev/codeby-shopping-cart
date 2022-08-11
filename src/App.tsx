@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Wrapper from './components/Wrapper/Wrapper';
+import CartContainer from './components/CartContainer/CartContainer';
 
 function App() {
   return (
     <div>
-      <Wrapper />
+      <CartContainer />
     </div>
   );
 }
