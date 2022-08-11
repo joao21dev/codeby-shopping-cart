@@ -1,21 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
+import CartHeader from '../cartHeader/CartHeader';
 
 const Container = styled.section`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 80px;
+
   border-radius: 10px;
   background-color: #fff;
-  height: 450px;
-  width: 250px;
+  height: 800px;
+  width: 500px;
   box-shadow: 0px 0px 3px 5px #d7d7d7;
 `;
 
-const Wrapper = () => {
-  return <Container></Container>;
+const CartContainer = () => {
+  return (
+    <Container>
+      <CartHeader />
+    </Container>
+  );
 };
 
-export default Wrapper;
+export default CartContainer;
