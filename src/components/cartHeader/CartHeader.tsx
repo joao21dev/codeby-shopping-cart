@@ -5,20 +5,19 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70px;
+  height: 50px;
   border-bottom: 2px solid #d4d3d3;
 `;
 const Title = styled.h1`
-  font-size: 24px;
-  font-weight: bold;
-  text-transform: capitalize;
+  font-size: 18px;
+  font-weight: 900;
   color: #000;
 `;
 
 const CartHeader = () => {
   return (
     <Header>
-      <Title>meu carrinho</Title>
+      <Title>Meu carrinho</Title>
     </Header>
   );
 };

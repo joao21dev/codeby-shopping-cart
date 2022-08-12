@@ -41,7 +41,7 @@ interface IFetch {
 }
 
 const CartProduct = () => {
-  const [posts, setPosts] = useState<any | null>([]);
+  const [products, setPRoducts] = useState<any | null>([]);
   [];
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const CartProduct = () => {
       .get<IFetch>('http://localhost:3001/items?_page=1&_limit=4')
       .then((res) => {
         console.log(res);
-        setPosts(res.data);
+        setPRoducts(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -57,14 +57,14 @@ const CartProduct = () => {
   }, []);
   return (
     <div>
-      {posts.map((post: IProduct) => {
+      {products.map((product: IProduct) => {
         return (
-          <Container key={post.id}>
-            <Image src={post.imageUrl} />
+          <Container key={product.id}>
+            <Image src={product.imageUrl} />
             <InfoWrapper>
-              <Name>{post.name}</Name>
-              <Discount>R$ {post.listPrice}</Discount>
-              <Price>R$ {post.sellingPrice}</Price>
+              <Name>{product.name}</Name>
+              <Discount>R$ {product.listPrice}</Discount>
+              <Price>R$ {product.sellingPrice}</Price>
             </InfoWrapper>
           </Container>
         );
