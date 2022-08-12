@@ -1,8 +1,6 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
-const imageUrl =
-  'http://codeby.vteximg.com.br/arquivos/ids/159959-800-1029/truffon-meio-amargo.png?v=636930938547630000';
 
 const Container = styled.section`
   display: flex;
@@ -13,7 +11,7 @@ const Image = styled.img`
   border: 2px solid #d4d3d3;
   width: 90px;
   height: 90px;
-  object-fit:cover;
+  object-fit: cover;
 `;
 const InfoWrapper = styled.div`
   margin-left: 20px;
@@ -30,16 +28,48 @@ const Price = styled.h2`
   font-weight: bold;
 `;
 
+interface IProduct {
+  name: string;
+  id: number;
+  imageUrl: string;
+  listPrice: number;
+  sellingPrice: number;
+}
+
+interface IFetch {
+  res: IProduct[];
+}
+
 const CartProduct = () => {
+  const [posts, setPosts] = useState<any | null>([]);
+  [];
+
+  useEffect(() => {
+    axios
+      .get<IFetch>('http://localhost:3001/items?_page=1&_limit=4')
+      .then((res) => {
+        console.log(res);
+        setPosts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
-    <Container>
-      <Image src={imageUrl} />
-      <InfoWrapper>
-        <Name>Trufa de Morango</Name>
-        <Discount>R$ 1,23</Discount>
-        <Price>R$ 1,11</Price>
-      </InfoWrapper>
-    </Container>
+    <div>
+      {posts.map((post: IProduct) => {
+        return (
+          <Container key={post.id}>
+            <Image src={post.imageUrl} />
+            <InfoWrapper>
+              <Name>{post.name}</Name>
+              <Discount>R$ {post.listPrice}</Discount>
+              <Price>R$ {post.sellingPrice}</Price>
+            </InfoWrapper>
+          </Container>
+        );
+      })}
+    </div>
   );
 };
 
