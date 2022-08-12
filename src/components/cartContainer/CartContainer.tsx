@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import CartHeader from '../cartHeader/CartHeader';
+import CartProduct from '../cartProduct/CartProduct';
 
 const Container = styled.section`
   position: absolute;
@@ -19,6 +20,7 @@ const CartContainer = () => {
   return (
     <Container>
       <CartHeader />
+      <CartProduct />
     </Container>
   );
 };
