@@ -2,7 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 const CartFooter = () => {
-  const Container = styled.footer``;
+  const Container = styled.footer`
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+  `;
 
   const TotalWrapper = styled.section`
     display: flex;

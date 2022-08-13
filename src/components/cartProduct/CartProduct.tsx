@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { IGetProducts, IProduct } from './CartProductModel';
 
 const Container = styled.section`
   display: flex;
@@ -28,25 +29,46 @@ const Price = styled.h2`
   font-weight: bold;
 `;
 
-interface IProduct {
-  name: string;
-  id: number;
-  imageUrl: string;
-  listPrice: number;
-  sellingPrice: number;
-}
+const PaginationButtonsWrapp = styled.div`
+  position: fixed;
+  bottom: 150px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
+  padding-block: 30px;
+  display: flex;
+  justify-content: center;
 
-interface IFetch {
-  res: IProduct[];
-}
+  & :hover {
+    opacity: 0.8;
+  }
+`;
+
+const Button = styled.button`
+  margin-inline: 5px;
+  width: 34px;
+  height: 35px;
+  cursor: pointer;
+  background-color: ${({ index, currentPage }: any) =>
+    index === currentPage ? '#0631f5a4' : 'red'};
+
+  border: 1px solid #0631f5a4;
+  border-radius: 5px;
+  color: #fff;
+`;
 
 const CartProduct = () => {
   const [products, setPRoducts] = useState<any | null>([]);
-  [];
+  const [productsPerPage] = useState(3);
+  const [currentPage, setCurrentPage] = useState(0);
+  const pages = Math.ceil(products.length / productsPerPage);
+  const startIndex = currentPage * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const currentProducts = products.slice(startIndex, endIndex);
 
   useEffect(() => {
     axios
-      .get<IFetch>('http://localhost:3001/items?_page=1&_limit=4')
+      .get<IGetProducts>('http://localhost:3001/items')
       .then((res) => {
         console.log(res);
         setPRoducts(res.data);
@@ -57,7 +79,7 @@ const CartProduct = () => {
   }, []);
   return (
     <div>
-      {products.map((product: IProduct) => {
+      {currentProducts.map((product: IProduct) => {
         return (
           <Container key={product.id}>
             <Image src={product.imageUrl} />
@@ -69,6 +91,20 @@ const CartProduct = () => {
           </Container>
         );
       })}
+      <PaginationButtonsWrapp>
+        {Array.from(Array(pages), (item, index) => {
+          return (
+            <div>
+              <Button
+                value={index}
+                onClick={(e) => setCurrentPage(Number((e.target as HTMLInputElement).value))}
+              >
+                {index + 1}
+              </Button>
+            </div>
+          );
+        })}
+      </PaginationButtonsWrapp>
     </div>
   );
 };
