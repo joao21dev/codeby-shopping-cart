@@ -57,6 +57,8 @@ const Button = styled.button`
   color: #fff;
 `;
 
+const url = 'http://localhost:3001/items';
+
 const CartProduct = () => {
   const [products, setPRoducts] = useState<any | null>([]);
   const [productsPerPage] = useState(3);
@@ -73,7 +75,7 @@ const CartProduct = () => {
 
   useEffect(() => {
     axios
-      .get<IGetProducts>('http://localhost:3001/items')
+      .get<IGetProducts>(url)
       .then((res) => {
         console.log(res);
         setPRoducts(res.data);
