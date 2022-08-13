@@ -57,7 +57,7 @@ const Button = styled.button`
   color: #fff;
 `;
 
-const url = 'https://codeby-shopping-cart-challenge.herokuapp.com/api';
+const url = 'https://codeby-shopping-cart-challenge.herokuapp.com/items';
 
 const CartProduct = () => {
   const [products, setPRoducts] = useState<any | null>([]);
