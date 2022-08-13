@@ -31,7 +31,7 @@ const Price = styled.h2`
 
 const PaginationButtonsWrapp = styled.div`
   position: fixed;
-  bottom: 150px;
+  bottom: 210px;
   left: 0px;
   right: 0px;
   margin-bottom: 0px;
@@ -66,9 +66,10 @@ const CartProduct = () => {
   const endIndex = startIndex + productsPerPage;
   const currentProducts = products.slice(startIndex, endIndex);
 
-  const currencyFormat = (value: number) => {
-    return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
-  };
+  const currencyFormat = new Intl.NumberFormat('pt-br', {
+    style: 'currency',
+    currency: 'BRL',
+  });
 
   useEffect(() => {
     axios
@@ -89,8 +90,9 @@ const CartProduct = () => {
             <Image src={product.imageUrl} />
             <InfoWrapper>
               <Name>{product.name}</Name>
-              <Discount>{currencyFormat(product.listPrice)}</Discount>
-              <Price>{currencyFormat(product.sellingPrice)}</Price>
+              <Discount>{currencyFormat.format(product.listPrice)}</Discount>
+
+              <Price>{currencyFormat.format(product.sellingPrice)}</Price>
             </InfoWrapper>
           </Container>
         );
