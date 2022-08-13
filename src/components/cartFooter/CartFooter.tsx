@@ -55,7 +55,7 @@ const CartFooter = () => {
 
   useEffect(() => {
     axios
-      .get<IGetProducts>('http://localhost:3001/items')
+      .get<IGetProducts>('https://codeby-shopping-cart-challenge.herokuapp.com/items')
       .then((res) => {
         console.log(res);
         setPRoducts(res.data);
