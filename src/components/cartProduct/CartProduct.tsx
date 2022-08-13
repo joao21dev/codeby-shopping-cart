@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { IGetProducts, IProduct } from './CartProductModel';
 
 const Container = styled.section`
   display: flex;
@@ -56,18 +57,6 @@ const Button = styled.button`
   color: #fff;
 `;
 
-interface IProduct {
-  name: string;
-  id: number;
-  imageUrl: string;
-  listPrice: number;
-  sellingPrice: number;
-}
-
-interface IFetch {
-  res: IProduct[];
-}
-
 const CartProduct = () => {
   const [products, setPRoducts] = useState<any | null>([]);
   const [productsPerPage] = useState(3);
@@ -79,7 +68,7 @@ const CartProduct = () => {
 
   useEffect(() => {
     axios
-      .get<IFetch>('http://localhost:3001/items')
+      .get<IGetProducts>('http://localhost:3001/items')
       .then((res) => {
         console.log(res);
         setPRoducts(res.data);
