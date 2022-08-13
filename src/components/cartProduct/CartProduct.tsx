@@ -66,6 +66,10 @@ const CartProduct = () => {
   const endIndex = startIndex + productsPerPage;
   const currentProducts = products.slice(startIndex, endIndex);
 
+  const currencyFormat = (value: number) => {
+    return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+  };
+
   useEffect(() => {
     axios
       .get<IGetProducts>('http://localhost:3001/items')
@@ -85,8 +89,8 @@ const CartProduct = () => {
             <Image src={product.imageUrl} />
             <InfoWrapper>
               <Name>{product.name}</Name>
-              <Discount>R$ {product.listPrice}</Discount>
-              <Price>R$ {product.sellingPrice}</Price>
+              <Discount>{currencyFormat(product.listPrice)}</Discount>
+              <Price>{currencyFormat(product.sellingPrice)}</Price>
             </InfoWrapper>
           </Container>
         );
